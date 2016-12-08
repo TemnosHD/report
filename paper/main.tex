@@ -1,0 +1,245 @@
+\documentclass[10pt,a4paper]{scrartcl}
+\usepackage{a4wide}
+\usepackage{psfrag}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[round,colon]{natbib}
+\usepackage{listings}
+\usepackage{subfig}
+\usepackage{units}
+\usepackage{booktabs}
+
+% section style
+\usepackage{sectsty}
+\allsectionsfont{ \large }
+
+% dot after (sub)section number
+\makeatletter
+\renewcommand*{\@seccntformat}[1]{%
+   \csname the#1\endcsname.\quad
+}
+\makeatother
+
+
+\newcommand{\note}[1]{[\textbf{#1}]} % for comments in the text - should be deleted when all comments are dealt with
+
+\hyphenation{phe-no-me-no-lo-gi-cal con-duc-tance-ba-sed} 
+
+\newcommand{\greatTitle}{ABC DEF}
+\title{\greatTitle}
+
+\author{
+\bf{Daniel Br\"uderle$^{1*}$ Eric M\"uller$^{1}$\thanks{The first two authors contributed equally to this work.},} \\ 
+\and Andrew Davison$^{2}$, Eilif Muller$^{3}$,\\ 
+Johannes Schemmel$^{1}$, Karlheinz Meier$^{1}$\\
+\vspace{5pt}\\
+$^{1}$Kirchhoff Institute for Physics, University of Heidelberg, Germany\\
+$^{2}$Unite de Neurosciences Integratives et Computationelles,\\
+CNRS, Gif sur Yvette, France\\
+$^{3}$Laboratory of Computational Neuroscience, \\
+Ecoles Polytechniques Federales de Lausanne, Switzerland
+}
+
+\begin{document}
+
+\rm
+
+%\maketitle
+% manual title formatting 
+\begin{center}
+	{\bf \Large \greatTitle}\\
+\vspace{20pt}
+{\bf Daniel Br\"uderle$^{*1\dagger}$ Eric M\"uller$^{1\dagger}$, Andrew Davison$^{2}$,\\ 
+Eilif Muller$^{3}$, Johannes Schemmel$^{1}$, Karlheinz Meier$^{1}$}\\
+\end{center}
+\begin{flushleft}
+$^{1}$~Kirchhoff Institute for Physics, University of Heidelberg, Germany\\
+$^{2}$~UNIC, CNRS, Gif sur Yvette, France\\  %Unite de Neurosciences Integratives et Computationelles
+$^{3}$~Laboratory of Computational Neuroscience, EPFL, Switzerland\\
+$^{\dagger}$~The first two authors contributed equally to this work.
+\end{flushleft}
+\vspace{15pt}
+
+{\bf \noindent Running title:}\\
+Python Interface for Neuromorphic Hardware\\
+\vspace{10pt}
+
+{\bf \noindent Correspondence:}\\
+Daniel Br\"uderle\\
+Kirchhoff Institute for Physics\\
+Im Neuenheimer Feld 227\\
+69120 Heidelberg, Germany\\
+bruederle@kip.uni-heidelberg.de\\
+\vspace{20pt}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf \large \noindent Abstract}\\
+
+\noindent df sadf sadf sadf dfsa\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf \large \noindent Keywords}\\
+
+\noindent Neuromorphic, VLSI, hardware, wafer-scale, software, modeling, computational neuroscience, Python, PyNN
+
+\newpage
+\section{\large Introduction}
+\label{sec:introduction}
+
+models of neural systems~\citep{vogelstein2007reconfigurable, merolla2006dynamic, hafliger2007adaptive, serrano_nips2005, renaud2007neuromimetic, schemmel_iscas07, schemmel_ijcnn2008, ehrlich_ssd07}.
+ 
+
+Further fundamental differences between hardware and software models will be discussed in Section~\ref{sec:introduction}.
+The neuromorphic hardware systems we consider in this article, as described in \cite{schemmel_iscas07, schemmel_ijcnn2008}, possess a crucial feature: they operate at a highly accelerated rate.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}[t]{l l r r}
+\toprule
+\multicolumn{4}{c}{Biological}\\
+\multicolumn{4}{c}{Interpretation}\\
+\midrule
+Param&\small Unit&\small Min&\small Max\\
+\\
+\midrule
+$C_\mathrm{m}$&nF&0.2&0.2\\
+$g_l$&nS&20&40\\
+$E_\mathrm{l}$&mV&-80&-55\\
+$E_\mathrm{i}$&mV&-80&-55\\
+$E_\mathrm{e}$&mV&-80&20\\
+$V_{\mbox \tiny \mathrm{th}}$&mV&-80&-55\\
+$V_{\mbox \tiny \mathrm{reset}}$&mV&-80&-55\\
+$\tau_{\mbox \tiny syn}$&ms&30&50\\
+$g^{\mbox{\tiny max}}$&nS&1&100\\
+\bottomrule
+\end{tabular}
+\begin{tabular}[t]{l c r}
+\toprule
+\multicolumn{3}{c}{Hardware Parameter} \\
+\multicolumn{3}{c}{Implementation} \\
+\midrule
+\small Physical&\small Configurable&\small Estimation\\
+\small Quantity&&\small of Uncertainty\\
+\midrule
+\small capacitance&no&10\%\\
+\small current&yes&10\%\\
+\small voltage&yes&2\%\\
+\small voltage&yes&2\%\\
+\small voltage&yes&unknown\\
+\small voltage&yes&5\%\\
+\small voltage&yes&10\%\\
+\small current&yes&25\%\\
+\small current&yes&25\%\\
+\bottomrule
+\end{tabular}
+\caption{\label{table_parameters} The most important hardware model parameters, the type of physical quantity used for their implementation, their configurability and an estimation of uncertainty. The first four columns show their typical biological interpretation and the resulting value ranges. The translation between both domains depends on the chosen speedup and the desired biological parameter value ranges. The given estimations (some being educated guesses) of configuration uncertainty reflect the current state of available methods to measure, to adjust or to calibrate the values, and may not necessarily reflect hardware limitations. The uncertainty of $E_\mathrm{e}$ is load-dependent, the relation is not yet sufficiently analyzed.}
+\end{center}
+\end{table}
+
+%\begin{figure}
+%   \flushleft
+%   \psfrag{p0}[c][c]{PC}
+%   \psfrag{p1}{digital}
+%   \psfrag{p2}{analog}
+%   \psfrag{p3}[c][c]{Computer Network}
+%   \psfrag{p4}{Oscilloscope}
+%   \psfrag{p5}{Backplane}
+%   \psfrag{p6}{Carrier boards}
+%   \psfrag{p7}[c][c]{Neural Network Chip}
+%%   \includegraphics[width=0.7\textwidth]{fig/stage1_system_setup_grey}
+%   \caption{\label{figure_system_setup} Schematic of the accelerated FACETS hardware system framework. Via a digital connection, software running on the host computer can control the parameters of any neural network chip mounted on a carrier board on the communication backplane. It can stimulate the network with externally generated spikes and can record spikes generated on the chip. Analog sub-threshold information acquired with an oscilloscope can be integrated into the software via a network connection.}
+%\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\newpage
+\lstset{tabsize=4,showspaces=false,showtabs=false}
+\begin{lstlisting}[basicstyle=\ttfamily\normalsize,frame=single,numbers=left,numberstyle=\small,language=python,caption=PyNN Example Script. For detailed explanation see text.\label{listing_pynn_example}]
+from pyNN.nest2 import *  
+# OR: from pyNN.hardware.stage1 import *
+
+numInhNeurons =  20
+numExcNeurons =  80
+numInhInputs  =  40
+numExcInputs  = 160
+w_exc = 0.0005  # uS
+w_inh = 0.0016  # uS
+
+neuronParams = {    'v_reset'    : -80.0,    # mV 
+                    'e_rev_I'    : -75.0,    # mV
+                    'v_rest'     : -70.0,    # mV
+                    'v_thresh'   : -57.0,    # mV
+                    'g_leak'     :  20.0,    # nS
+                    'tau_syn_E'  :  30.0,    # ms
+                    'tau_syn_I'  :  30.0   } # ms 
+
+inputParameters = { 'rate'       : 5.0,      # Hz 
+                    'duration'   : 5000    } # ms 
+
+setup(timestep=0.1)
+
+n_inh = create(IF_facets_hardware1,neuronParams,n=numInhNeurons)
+n_exc = create(IF_facets_hardware1,neuronParams,n=numExcNeurons)
+net   = n_exc + n_inh
+
+i_exc = create(SpikeSourcePoisson,inputParameters,n=numExcInputs)
+i_inh = create(SpikeSourcePoisson,inputParameters,n=numInhInputs)
+
+connect(i_exc,net,weight=w_exc,synapse_type='excitatory',p=0.5)
+connect(i_inh,net,weight=w_inh,synapse_type='inhibitory',p=0.5)
+
+connect(n_inh,net,weight=w_inh,synapse_type='inhibitory',p=0.5)
+
+record(net[0:8], 'spikes.dat')
+record_v(net[0], 'membrane.dat')
+
+run(5000)  # duration in ms
+end()
+\end{lstlisting}
+\vspace{15pt}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\clearpage
+\section{\large Discussion} 
+
+asdf
+\vspace{15pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf \large \noindent Conflict of Interest Statement}\\
+
+\noindent The authors declare that the research presented in this paper was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest.\\
+\vspace{15pt}
+
+{\bf \large \noindent Acknowledgments}\\
+
+\noindent This work is supported by the European Union under grant no.\ IST-2005-15879 (FACETS).\\
+\vspace{15pt}
+
+
+
+\bibliographystyle{plainnat}
+\renewcommand\refname{\subsubsection*{References}}
+\small{
+    \bibliography{vision-bibtex/vision}
+}
+
+\end{document}
+
+% vim: set et sw=4 ts=4 sts=4 wrap lbr:
