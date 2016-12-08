@@ -1,0 +1,5 @@
+Please clone vision's bibtex somewhere
+$ git clone git@gitviz.kip.uni-heidelberg.de:vision-bibtex.git somewhere
+and symlink here:
+$ ln -s somewhere/vision.bib
+$ ln -s somewhere/styles/agu.bst

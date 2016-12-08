@@ -1,0 +1,281 @@
+% ------------------------------------------------------------------------------
+% layout
+\documentclass [twoside]{scrreprt}                % [] 10pt|11pt|12pt font size, default 10pt
+	  \KOMAoptions{paper=a4}
+
+% encoding stuff
+\usepackage [utf8]{inputenc}
+\usepackage [T1]{fontenc}                         % fuer korrekte trennung deutscher umlaute, scharf-s etc.
+
+
+% figures
+\usepackage {pgf}                                 % includepgf for bitmaps
+\usepackage {epsfig}
+\usepackage {psfrag}                              % replacing strings in eps files
+%\usepackage [bf,small]{caption}                   % caption style
+\usepackage {ifpdf}
+\ifpdf
+    \usepackage{graphicx}
+    \usepackage{epstopdf}
+    \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+    \pdfcompresslevel=9
+\else
+    \usepackage {graphicx}
+\fi
+
+\usepackage {subfig}                              % subfigures a) b)...
+%\usepackage {floatflt}                           % packages supporting in-text floats
+%\usepackage {wrapfig}                            % another one
+%\usepackage {picins}                             % another one
+%\usepackage{timing}                              % deprecated use, use below!
+\usepackage{tikz-timing}                          % timing diagrams
+\usepackage{sidecap}
+
+
+% tables
+\usepackage{multirow}                             % col- and rowspan...
+\usepackage{booktabs}                             % professional table layout
+
+
+% math
+\usepackage{bbm}                                  % black board style, (e.g. \mathbbm{R})
+\usepackage{amssymb}
+\usepackage{amsmath}                              % e.g. \nobreakslash- for non-breakable hyphens
+\usepackage{bbold}
+\usepackage{amsfonts}
+\usepackage{units}
+
+% text
+\usepackage {latexsym}                            % additional symbols
+%\usepackage{lmodern}                              % latin modern
+\usepackage [english,ngerman]{babel}              % language (change via "\selectlanguage{english}")
+%\usepackage[colorlinks=true,pdftex=true,linkcolor=black,citecolor=black,urlcolor=blue,plainpages=false,pdfpagelabels]{hyperref}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,filecolor=black,urlcolor=black,plainpages=false,pdfpagelabels,breaklinks=true]{hyperref}
+%\usepackage[all]{hypcap}                          % links to figures point to upper border (not caption)
+\usepackage{breakurl}
+\usepackage{hyphenat}
+\usepackage[normalem]{ulem}                       % underline text...
+\usepackage{listings}                            % source/code listings
+\usepackage[plain]{algorithm}
+\usepackage{algorithmicx}                        % pseudo code
+\usepackage{algpseudocode}                       % pseudo code
+\usepackage{units}                               % \unit[123]{U}
+\usepackage{mdwlist}                             % dichtere itemize* etc.
+\usepackage{paralist}                            % inline Listen
+\usepackage{natbib}
+
+
+% list of abbreviations, index
+\usepackage{nomencl}
+    \let\abbrev\nomenclature
+    \renewcommand{\nomname}{List of Abbreviations}
+    \setlength{\nomlabelwidth}{.25\hsize}
+    \renewcommand{\nomlabel}[1]{#1 \dotfill}
+    \setlength{\nomitemsep}{-\parsep}
+    %\makeglossary
+    \makenomenclature
+    \newcommand{\markup}[1]{\uline{#1}}
+\usepackage{makeidx}                              % index of key words
+    \makeindex
+
+
+% layout
+\usepackage{todonotes}
+%\usepackage{stfloats}
+%\usepackage{dblfloatfix}
+\usepackage{fixltx2e}
+%\usepackage {afterpage}                          % \afterpage{xyz} executes xyz after current page is finished
+%\usepackage {flafter}                            % no object before definition
+%\usepackage {float}                              % Here(!!!) placement option
+% ------------------------------------------------------------------------------
+
+
+% source aliases
+\include{tex/aliases}
+
+
+% hypenation (englisch)
+\selectlanguage{english}
+\hyphenation    {HAGEN HASTE HANNEE Bert-schin-ger Maass ma-xi-mum SoftHASTE
+neu-ron pre-synaptic post-synaptic}
+
+% hypenation (deutsch)
+\selectlanguage{ngerman}
+\hyphenation    {HAGEN HASTE HANNEE Bert-schin-ger Maass SoftHASTE}
+
+
+\tolerance 1414
+\hbadness 1414
+\emergencystretch 1.5em % critical parameter!!!
+%\displaywidowpenalty % avoid widows after math displays
+\raggedbottom % should be default anyway
+%\clubpenalty = 10000
+%\widowpenalty = 10000
+%\hfuzz 0.3pt
+%\vfuzz
+
+
+%\renewcommand{\bottomfraction} {0.70} % max fraction of page for floats at bottom
+%\renewcommand{\textfraction} {0.20} % min fraction of page for text
+%\renewcommand{\floatpagefraction} {0.60} % min fraction of floatpage that should have floats
+%\renewcommand{\dblfloatpagefraction}{0.60} % for twocolumn layout, see floatpagefraction above
+%\setcounter{totalnumber} {6} % max number of floats on a single page
+%\setcounter{topnumber} {6} % max number of top floats on a single page
+%\setcounter{dbltopnumber}{6} % for twocolumn layout, see topnumber above
+%\setcounter{bottomnumber}{6} % max number of bottom floats on a single page
+% ------------------------------------------------------------------------------
+
+\pagestyle  {empty}                               % plain, empty, headings oder myheadings.
+
+
+
+\begin{document}
+
+% ------------- Cover Pages ----------------------
+
+\include{cover/cover_kip}
+
+\cleardoublepage
+\include{cover/cover_faculty}
+%\include{cover/cover_faculty_ger}
+
+\cleardoublepage
+\include{cover/cover_prof}
+%\include{cover/cover_prof_ger}
+
+%-------------------------------------------------
+
+
+
+
+
+
+% and now in englisch!
+\selectlanguage{english}
+
+
+
+
+
+% ------------- Abstract -------------------------
+
+\cleardoublepage
+
+\pagestyle{plain}
+
+\setcounter{page}{1}
+\pagenumbering{Roman}
+
+\include{tex/abstract}
+
+%-------------------------------------------------
+
+
+
+
+% ------------- Table of Contents ----------------
+
+\cleardoublepage
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+%-------------------------------------------------
+
+
+
+
+
+
+% ------------- Chapters -------------------------
+
+\cleardoublepage
+
+\pagestyle{headings}
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+
+%%% INCLUDES %%%%%%%%%%%%%%%%%%%%%%%%%%
+% introduction
+\input{tex/introduction}
+
+% chapter X
+%\input{tex/X}
+% chapter Y
+%\input{tex/Y}
+
+% discussion
+\input{tex/discussion}
+
+% outlook
+\input{tex/outlook}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\appendix
+
+\include{tex/appendix}
+
+\pagestyle{plain}       % ab hier werden nur noch seitenzahlen angezeigt
+% ------------- Abkuerzungsverzeichnis -----------
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Nomenclature}
+\printnomenclature
+% ------------- Abbildungsverzeichnis ------------
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{List Of Figures}
+%\listoffigures
+% -------------- Tabellenverzeichnis -------------
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{List Of Tables}
+%\listoftables
+% ------------- Algorithmenverzeichnis -----------
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{List Of Algorithms}
+%\listofalgorithms
+% ------------------------------------------------
+
+\pagestyle{headings}    % ab hier werden seitenzahlen UND kapitelueberschriften in der kopfzeile angezeigt
+
+% ------------- Bibliography ---------------------
+\cleardoublepage
+\bibliographystyle{bib/agu}
+\bibliography{bib/vision}
+\addcontentsline{toc}{chapter}{Bibliography}
+% ------------------------------------------------
+
+
+\pagestyle{plain}
+
+% ---------------------- Index -------------------
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Index}
+\printindex
+% ------------------------------------------------
+
+% ------------- Thanks ... -----------------------
+
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Acknowledgments}
+\include{tex/acknowledgments}
+
+% ------------------------------------------------
+
+
+% ------------- Statement ------------------------
+
+\cleardoublepage
+\pagestyle{empty}
+\include{cover/statement}
+
+% ------------------------------------------------
+
+
+
+
+\end{document}
