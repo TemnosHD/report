@@ -14,14 +14,14 @@
 \usepackage {psfrag}                              % replacing strings in eps files
 %\usepackage [bf,small]{caption}                   % caption style
 \usepackage {ifpdf}
-\ifpdf
+%\ifpdf
     \usepackage{graphicx}
     \usepackage{epstopdf}
-    \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+    %\DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
     \pdfcompresslevel=9
-\else
-    \usepackage {graphicx}
-\fi
+%\else
+  %  \usepackage {graphicx}
+%\fi
 
 \usepackage {subfig}                              % subfigures a) b)...
 %\usepackage {floatflt}                           % packages supporting in-text floats
@@ -135,14 +135,6 @@ neu-ron pre-synaptic post-synaptic}
 
 \include{cover/cover_kip}
 
-\cleardoublepage
-\include{cover/cover_faculty}
-%\include{cover/cover_faculty_ger}
-
-\cleardoublepage
-\include{cover/cover_prof}
-%\include{cover/cover_prof_ger}
-
 %-------------------------------------------------
 
 
@@ -159,7 +151,6 @@ neu-ron pre-synaptic post-synaptic}
 
 % ------------- Abstract -------------------------
 
-\cleardoublepage
 
 \pagestyle{plain}
 
