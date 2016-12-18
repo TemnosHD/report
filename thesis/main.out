@@ -1,5 +1,10 @@
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
-\BOOKMARK [0][-]{chapter.2}{Discussion}{}% 2
-\BOOKMARK [0][-]{chapter.3}{Outlook}{}% 3
-\BOOKMARK [0][-]{chapter.3}{Appendix}{}% 4
-\BOOKMARK [0][-]{appendix*.5}{Bibliography}{}% 5
+\BOOKMARK [0][-]{chapter.1}{Compiler Structure}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Insn-Coding and Register Transfer Language}{}% 2
+\BOOKMARK [0][-]{chapter.3}{Adding a built-in type}{}% 3
+\BOOKMARK [0][-]{chapter.4}{Argument handling}{}% 4
+\BOOKMARK [0][-]{chapter.5}{Special Cases}{}% 5
+\BOOKMARK [0][-]{chapter.6}{Nameing conventions}{}% 6
+\BOOKMARK [0][-]{chapter.7}{Discussion}{}% 7
+\BOOKMARK [0][-]{chapter.8}{Outlook}{}% 8
+\BOOKMARK [0][-]{chapter.8}{Appendix}{}% 9
+\BOOKMARK [0][-]{appendix*.5}{Bibliography}{}% 10

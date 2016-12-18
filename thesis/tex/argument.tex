@@ -1,0 +1,9 @@
+\chapter{Argument handling}
+\label{chapter:argument handling}
+
+After all builtin macros and overloaded macros are initialized, we want to assign the argument types of our builtin functions. This is quite similar to the argument type in normal functions but looks quite differently. We actually need to mention every argument type that our builtin supports. This means we need to differ between signed and unsigned variables as well as different vector and integer sizes.
+Hence we must not forget any valid combination of output and input operands that could come up.
+To achive this the file rs6000-c.c build a connecton between our overloaded macros and the builtin macros we created earlier. Htis contains an array of |altivec_builtin_types| called |altivec_overloaded_ builtins|. the |altivec_builtin_types| struct consits of the macro codes from rs6000-builtins.def and 4 signed chars that are the return typ and up to three input types. since we only need to the third will always be zero. 
+For every argument type available there is a macro defined that is named also named after the argument type. e.g. |RS6000_BTI_V16QI| for a signed 16 element quarter inetger vector, |RS6000_BTI_unsigned_INTSI| for an unsigned singel integer, |~RS6000_BTI_INTQI| for a pointer adress of a signed quarter integer.
+Now we need to go through every combination of input and return types there is for our builtin.
+…

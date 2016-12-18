@@ -31,6 +31,18 @@
 \usepackage{tikz-timing}                          % timing diagrams
 \usepackage{sidecap}
 
+\usepackage{listings}
+\lstset{
+    frameround=fttt,
+    language=C,
+    numbers=left,
+    breaklines=true,
+    keywordstyle=\color{blue}\bfseries, 
+    %basicstyle=\ttfamily\color{red},
+    numberstyle=\color{black}
+    }
+\lstMakeShortInline[columns=fixed]|
+
 
 % tables
 \usepackage{multirow}                             % col- and rowspan...
@@ -190,12 +202,18 @@ neu-ron pre-synaptic post-synaptic}
 
 %%% INCLUDES %%%%%%%%%%%%%%%%%%%%%%%%%%
 % introduction
-\input{tex/introduction}
+\input{tex/compiler_structure}
 
 % chapter X
-%\input{tex/X}
+\input{tex/insn_coding}
 % chapter Y
-%\input{tex/Y}
+\input{tex/addingbuiltin}
+
+\input{tex/argument}
+
+\input{tex/special}
+
+\input{tex/nameing}
 
 % discussion
 \input{tex/discussion}
