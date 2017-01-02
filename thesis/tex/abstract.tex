@@ -3,7 +3,9 @@
 \textbf{\thesisTitle}
 \end{center}
 
-As part of the human brain project BrainScaleS is a unique project on many levels. This includes a processor solely used by the HICANN DLS, which manages synaptic weights for every neuron built into one of the many wafers. To accelerate the speed at which this so called plasticity processor unit (PPU) computes all synaptic weights of every neuron used, the processor has an extended instruction set architecture (ISA) that supports vector registers and single input multiple data (SIMD).
-This report deals with the task of adding built-in functions to an existing backend of GCC, specifically the one used by the PPU, in order to extend the already implemented set of functions according to the users needs
+As part of the Human Brain Project, BrainScaleS is a unique project on many levels. This includes a processor solely used by the HICANN-DLS, which manages synaptic weights for every neuron built into one of the many wafers. To accelerate the speed at which this so called plasticity processor unit (PPU) computes all synaptic weights of every neuron used, the processor has an extended instruction set architecture (ISA) that supports vector registers and single input multiple data (SIMD).
+This report deals with the task of adding built-in functions to an existing backend of GCC, specifically the one used by the PPU, in order to extend the already implemented set of functions according to the users needs.
+
+As the BrainScaleS project has many facettes, it also incorporates a custom processor in the HICANN-DLS that handles the synaptic weights of neurons on a wafer, hence Plasticity Processor Unit (PPU). Because of the custom nature of the PPU it is not supported by any known compiler and current users have to handle register allocation and memory structures on a standard basis which is uncommon for users mainly familiar with front-end langugaes. Therefore it is planned to extend the GCC back-end to support the PPU. Part of this is the Expansion with custom built-in functions, that any front-end is meant to support. These built-in functions then allow for a more comfortable use of directives that still enable the user to trigger certain actions in the PPU.
 
 \end{abstract}

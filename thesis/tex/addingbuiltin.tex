@@ -6,11 +6,8 @@ WE must first differ between the different kinds of macros. the rs/6000 back-end
 Next we have to differ between the number of input opernad our built-in function is going to have and the number  in th etemplate name is meant to be equal to th enumber of input operands . all Macros expect output operand except for the X-names macros. which are special cases we will emphasize later.
 We now choose |BU_ALTIVEC_2| because our newest insn has to input operands and add the following lines:
 
-the first argument is the name of the macro and will be used by the compiler internally. the user only gets interact with the second string which is the new built-ins name for the front end. (for altivec built-ins the tempalte adds \_\_ builtin\_ altivec\_ in front of the given name). Next the attribute for the builtn must be given. typically this CONST but for builtins that load or store in the memory this is MEM for example. The last argument is the name of the insn we decided on earlier.
+the first argument is the name of the macro and will be used by the compiler internally. the user only gets interact with the second string which is the new built-ins name for the front end. (for altivec built-ins the tempalte adds |__builtin_altivec_| in front of the given name). Next the attribute for the builtn must be given. typically this |CONST| but for builtins that load or store in the memory this is |MEM| for example. The last argument is the name of the insn we decided on earlier.
 
 You can also add an „overload“ macro for your builtin as this allows for type checking and reducing builtins for different vector modes to just on final builtin.
-here we first need a Macro name and second the function name we want to use later (this functon name is preceeded by \_\_ builtin\_ vec\_)
+here we first need a Macro name and second the function name we want to use later (this functon name is preceeded by |__builtin_vec_|)
 
-
-
-\nocite{berge_iscas07}
