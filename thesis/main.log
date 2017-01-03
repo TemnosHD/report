@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.8.29)  3 JAN 2017 10:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.8.29)  3 JAN 2017 13:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1310,7 +1310,7 @@ converted-to.pdf fig/cover/Publ-Cover1.eps>
 (epstopdf)             \includegraphics on input line 14.
 Package epstopdf Info: Output file is already uptodate.
 
-<fig/cover/Publ-Cover1-eps-converted-to.pdf, id=34, 541.02126pt x 118.4425pt>
+<fig/cover/Publ-Cover1-eps-converted-to.pdf, id=30, 541.02126pt x 118.4425pt>
 File: fig/cover/Publ-Cover1-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig/cover/Publ-Cover1-eps-converted-to.pdf>
@@ -1367,7 +1367,7 @@ converted-to.pdf fig/cover/Publ-Cover2.eps>
 (epstopdf)             \includegraphics on input line 29.
 Package epstopdf Info: Output file is already uptodate.
 
-<fig/cover/Publ-Cover2-eps-converted-to.pdf, id=35, 393.47pt x 6.0225pt>
+<fig/cover/Publ-Cover2-eps-converted-to.pdf, id=31, 393.47pt x 6.0225pt>
 File: fig/cover/Publ-Cover2-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig/cover/Publ-Cover2-eps-converted-to.pdf>
@@ -1414,7 +1414,7 @@ Package epstopdf Info: Source file: <fig/cover/Publ-Cover3.eps>
 converted-to.pdf fig/cover/Publ-Cover3.eps>
 (epstopdf)             \includegraphics on input line 56.
 Package epstopdf Info: Output file is already uptodate.
-<fig/cover/Publ-Cover3-eps-converted-to.pdf, id=36, 401.5pt x 31.11626pt>
+<fig/cover/Publ-Cover3-eps-converted-to.pdf, id=32, 401.5pt x 31.11626pt>
 File: fig/cover/Publ-Cover3-eps-converted-to.pdf Graphic file (type pdf)
 
 <use fig/cover/Publ-Cover3-eps-converted-to.pdf>
@@ -1478,12 +1478,12 @@ Class scrreprt Warning: \float@addtolists detected!
 (scrreprt)              a package that still implements the
 (scrreprt)              deprecated \float@addtolist interface .
 
-) (./tex/insn_coding.texpdfTeX warning (ext4): destination with the same identi
-fier (name{page.1}) has been already used, duplicate ignored
+) (./tex/builtins.texpdfTeX warning (ext4): destination with the same identifie
+r (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.1 \chapter
-            {Creating a built-in function} [1
+            {Creating an intrinsic function} [1
 
 ]
 Chapter 2.
@@ -1507,7 +1507,13 @@ Underfull \hbox (badness 2753) in paragraph at lines 4--10
 
 [2
 
-] [3] [4] [5]) (./tex/discussion.tex [6]
+] [3]
+Underfull \hbox (badness 3118) in paragraph at lines 64--65
+[][][][] \T1/cmr/m/n/10.95 is now over-loaded with the work-ing builtin func-ti
+on
+ []
+
+[4] [5]) (./tex/discussion.tex [6]
 Chapter 3.
 ) (./tex/outlook.tex [7
 
@@ -1563,43 +1569,30 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 283.
 (./tex/appendix.aux) (./tex/acknowledgments.aux) (./cover/statement.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 283.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 283.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: DB344735D09C397C9286A853FB25A137;335
-(rerunfilecheck)             After:  8DF66207C493471E591245EA709CBC3A;295.
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 7E4BD921184C6A276A4AF5FEC477162E;297.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 283.
  ) 
 Here is how much of TeX's memory you used:
- 25284 strings out of 493105
- 461143 string characters out of 6137072
- 673765 words of memory out of 5000000
- 28038 multiletter control sequences out of 15000+600000
- 17324 words of font info for 48 fonts, out of 8000000 for 9000
+ 25301 strings out of 493105
+ 461341 string characters out of 6137072
+ 662334 words of memory out of 5000000
+ 28049 multiletter control sequences out of 15000+600000
+ 16560 words of font info for 47 fonts, out of 8000000 for 9000
  1157 hyphenation exceptions out of 8191
- 55i,9n,94p,799b,1936s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{chapter.5} has been referenced but does not exist
-, replaced by a fixed one
-
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/fo
-nts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-
-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0800.pfb><
-/usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fon
-ts/type1/public/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm-s
-uper/sfss1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1095.pfb></
-usr/share/texmf/fonts/type1/public/cm-super/sfsx2074.pfb></usr/share/texmf/font
-s/type1/public/cm-super/sftt0800.pfb>
-Output written on main.pdf (16 pages, 231030 bytes).
+ 55i,8n,94p,814b,1246s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf/
+fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/c
+m-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0800.pfb
+></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/f
+onts/type1/public/cm-super/sfsl1095.pfb></usr/share/texmf/fonts/type1/public/cm
+-super/sfss1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1095.pfb>
+</usr/share/texmf/fonts/type1/public/cm-super/sfsx2074.pfb></usr/share/texmf/fo
+nts/type1/public/cm-super/sftt0800.pfb>
+Output written on main.pdf (16 pages, 232699 bytes).
 PDF statistics:
- 270 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 102 named destinations out of 1000 (max. 500000)
- 84 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 240 compressed objects within 3 object streams
+ 109 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

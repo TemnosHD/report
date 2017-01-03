@@ -3,7 +3,7 @@
 \select@language {ngerman}
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Compiler Structure}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Creating a built-in function}{2}{chapter.2}
+\contentsline {chapter}{\numberline {2}Creating an intrinsic function}{2}{chapter.2}
 \contentsline {chapter}{\numberline {3}Discussion}{7}{chapter.3}
 \contentsline {chapter}{\numberline {4}Outlook}{8}{chapter.4}
 \contentsline {chapter}{Appendix}{9}{chapter.4}
