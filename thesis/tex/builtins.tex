@@ -1,4 +1,4 @@
-\chapter{Insn-Coding}
+\chapter{Creating a built-in function}
 \label{chapter:insn coding}
 
 The very basic level of creating your own built-in function is coding an insn that is connected to a basic operation the processor can handle.
@@ -18,7 +18,7 @@ The acronym vaddcuw depicts also the name of the function on a processor level w
 [(set_attr "type" "vecsimple")])
 \end{lstlisting}
 
-I will not start explaining the meaning of the Register Transfer Language that describes an insn as this is not needed in the course of making this insn a built-in function.
+There will be no explanatoin of the Register Transfer Language (RTL) that describes an insn since this is not needed in the course of making this insn a built-in function.
 The only important information we need really need is the number of arguments the insn takes as this is equivalent to the number of arguments the function itself will take and the code/name of the insn. In this case the code is "|altivec_vaddcuw|" and is takes two arguments.
 The next step is to add an entry into the builtin-description-file rs6000-builtins.def. The very beginning of this file consists of convenience macros that allow for better readability as most of the properties of a builtin function are similar or even the same. First there are the processors macros, that are divided into different groups depending on their properties such as the number of arguments. In our case we focus on those that take 1 to three argumetns and also the special builtins as these are the most used builtins. Each macro takes the same four arguments besides it's enumeration name. These are: The name of the function as string literal, a bit-mask that indicates which options are enabled, attribute information and the insn code.
 The macros then go even further as there are seperate builtin macros for different extensions. In our case the macros are called |BU_ALTIVEC_1, BU_ALTIVEC_2, BU_ALTIVEC_3| all of these have the |RS6000_BTM_ALTIVEC| bitmask and the same prefix for their enumeration name and function name. These are |ALTIVEC_BUILTIN_| for the enumeration name and |__builtin_altivec_| for the function name. Besides that each macro has a specific attribute such as |RS6000_BTC_TERNARY| for function with three arguments.
@@ -73,15 +73,71 @@ This brings our task of defining a builtin function to an end!
 
 But there is still one kind of common builtin function left that can differ to normal one-to-three-argument-builtins in many ways such as requiring a memory address for assembly macro instead of a register or simply not having a return value. These assembly macros qualify as special builtin functions that have the convenience macros |BU_ALTIVEC_X| and |BU_ALTIVEC_OVERLOADED_X| though a special macro can also be overloaded with a normal overload macro like |BU_ALTIVEC_OVERLOADED_2|.
 The special X-macro in a way that it has the insn code |CODE_FOR_nothing| like the overloaded macros and the macros are not intended to handled normally but will be catched in the main file rs6000.c which we will see later.
-We will have an example that uses a normal overloded macro since it is slightly easier and special overloded functions tend to need special handling in the main back-end file. Thus we take a look at |vec_mtvscr(a)| which copies the value of a into the Vector status and Control Register (VSCR) (Move To VSCR).
+We will have an example that uses a normal overloded macro since it is slightly easier and special overloded functions tend to need special handling in the main back-end file. Thus we take a look at |vec_mtvscr(a)| which copies the value of a into the Vector status and Control Register (VSCR) (Move To VSCR). The insn code for this builtin function is |altivec_mtvscr| and the assembly macro is |mtvscr %a|.
 It is obvious that this function does not generate any return value and therefore not fit a one-argument-builtin.
 \begin{lstlisting}[language=C++,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{red}] 
 BU_ALTIVEC_X (MTVSCR,		"mtvscr",	    MISC)
 ...
 BU_ALTIVEC_OVERLOAD_1 (MTVSCR,	   "mtvscr")
 \end{lstlisting}
-The other difference this builtin has is that it is not a |CONST| builtin but carry a |MISC| attribute. This argument is only used in special case that make an exception to |CONST| or |MEM| attributes. A |MEM| attribute simply means that the builtin function reads or writes the machines memory.
+The other difference this builtin has is that it is not a |CONST| builtin but carries a |MISC| attribute. This argument is only used in special cases that make an exception to |CONST| or any of the other special attributes and means specifically that there are no special attributes. We will discuss the other attributes but a explanation can be found in the rs6000.h file.
+In contrast to the builtin function |__biultin_altivec_vaddcuw| from earlier, the builtin function |__builtin_altivec_mtvscr| is of no use since there is no insn code connected with it. Thus we will add special cases in the function that handles the builtin functons or "expands" them. This is done in the |altivec_expand_builtin| function that handles special builtins exclusively. Normal builtins are expanded depending on their number of arguments at the very end of |rs6000_expand_builtin| where |altivec_expand_bulitin| is called before hand. 
+In the expander function the compiler switches between all special cases, which means there has to be an entry for every special builtin there is. For |mtvsrc| this entry looks something like:
+\begin{lstlisting}[language=C++,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{red}]
+case ALTIVEC_BUILTIN_MTVSCR:
+      icode = CODE_FOR_altivec_mtvscr;
+      arg0 = CALL_EXPR_ARG (exp, 0);
+      op0 = expand_normal (arg0);
+      mode0 = insn_data[icode].operand[0].mode;
 
-For implementing a builtin function for earlier GCC version (3.8-) I highly recommend the guide by ...
+      /* If we got invalid arguments bail out before generating bad rtl.  */
+      if (arg0 == error_mark_node)
+    	return const0_rtx;
+
+      if (! (*insn_data[icode].operand[0].predicate) (op0, mode0))
+     	op0 = copy_to_mode_reg (mode0, op0);
+
+      pat = GEN_FCN (icode) (op0);
+      if (pat)
+    	emit_insn (pat);
+      return NULL_RTX;
+\end{lstlisting}
+These lines are probably the most difficult part when adding a special builtin function. The easiest way is to look for a similar function, copy its code and modify it if nececssary. but we will go through this code briefly:
+First we see some important varibales that get their respective values. |icode| obviouly holds the insn code, |arg0| holds whatever the function gets as first argument, |op0| gets the operand of that argument, and |mode| holds the mode of the operand that the insn needs. It then checks if the argument is acutally valid and returns an error otherwise. Next it checks whether |mode| and |op0| match and tries to convert the operand if they do not match. |pat| gets to hold the directive to bulid an insn with code |icode| and operand |op0| and if this give no error the final insn is emmited. The return value has no purpose but detecting errors and thus is |NULL_RTX|.
+Now the compiler knows the insn code of this special insn but it needs to define the builtin as well. For non-normal builtin functions this is not done automatically but in |altivec_init_builtins|:
+\begin{lstlisting}[language=C++,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{red}] 
+def_builtin ("__builtin_altivec_mtvscr", void_ftype_v4si, ALTIVEC_BUILTIN_MTVSCR);
+\end{lstlisting}
+This adds |__builtin_altivec_mtvscr| to the list of defined functions and also gives the argument and return types (|void_ftype_v4si|, everything before |ftype| is the return type everything after the arguments). In this case it is not obvious why this needs to be done but fore bulitins that have different insn codes depending on the used modes thus the type of the input arguments this distinguishes these differences. In this case only |v4si| is chosen as mode because we will also have an overload for this new builtin function.
+This is done as awe did before by adding entries in rs6000-c.c for each combination of arguments and return types:
+\begin{lstlisting}[language=C++,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{red}] 
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_V4SI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_unsigned_V4SI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_bool_V4SI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_V8HI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_unsigned_V8HI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_bool_V8HI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_pixel_V8HI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_V16QI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_unsigned_V16QI, 0, 0 },
+ { ALTIVEC_BUILTIN_VEC_MTVSCR, ALTIVEC_BUILTIN_MTVSCR,
+   RS6000_BTI_void, RS6000_BTI_bool_V16QI, 0, 0 }
+\end{lstlisting}
+The return type obviously should be the same since there is no return type thus |RS6000_BTI_void| as first entry. Next there are 3 modes with different submodes, because all integer vector modes are allowed. A normal mode means that the elements are signed integers and an unsigned mode has unsigned elements. Bool elements have a single bool variable at each element and pixel is used for graphic usage of the AltiVec extension.
+This sets the last step to completing our special bulitin function that has a normal overloaded part.
+At last add shorter function name in s2pp.h:
+\begin{lstlisting}[language=C++,basicstyle=\ttfamily\scriptsize,keywordstyle=\color{red}] 
+#define vec_mtvscr __builtin_vec_mtvscr
+\end{lstlisting}
+For implementing a builtin function for earlier GCC versions (3.8-) I highly recommend the guide by ...
 
      

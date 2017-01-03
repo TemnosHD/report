@@ -3,13 +3,12 @@
 \select@language {ngerman}
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Compiler Structure}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Insn-Coding}{2}{chapter.2}
-\contentsline {chapter}{\numberline {3}Adding a built-in type}{5}{chapter.3}
-\contentsline {chapter}{\numberline {4}Discussion}{6}{chapter.4}
-\contentsline {chapter}{\numberline {5}Outlook}{7}{chapter.5}
-\contentsline {chapter}{Appendix}{8}{chapter.5}
+\contentsline {chapter}{\numberline {2}Creating a built-in function}{2}{chapter.2}
+\contentsline {chapter}{\numberline {3}Discussion}{7}{chapter.3}
+\contentsline {chapter}{\numberline {4}Outlook}{8}{chapter.4}
+\contentsline {chapter}{Appendix}{9}{chapter.4}
 \select@language {ngerman}
 \select@language {english}
 \select@language {ngerman}
 \select@language {english}
-\contentsline {chapter}{Bibliography}{9}{appendix*.5}
+\contentsline {chapter}{Bibliography}{11}{appendix*.5}
