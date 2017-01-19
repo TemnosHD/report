@@ -11,4 +11,4 @@
 \select@language {english}
 \select@language {ngerman}
 \select@language {english}
-\contentsline {chapter}{Bibliography}{11}{appendix*.5}
+\contentsline {chapter}{Bibliography}{11}{appendix*.11}
